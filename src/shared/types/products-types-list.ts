@@ -1,0 +1,1 @@
+export const ProductsTypesList = ['Chair', 'Cupboard', 'Table', 'Decoration'];

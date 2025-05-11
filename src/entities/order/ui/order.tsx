@@ -19,7 +19,7 @@ export const Order: React.FC<Props> = ({ order, number, className }) => {
 					<div>{number}. Order #{order.id.split("-")[0]}</div>
 					<div>{order.createdAt.split("T")[0]}</div>
 				</div>
-				<div className="text-gray-400 w-[400px]">{order.products}</div>
+				<div className="text-gray-400 w-[360px]">{order.products}</div>
 			</div>
 			<div className="grid grid-cols-2 gap-y-5 gap-x-10">
 				<div className="flex items-center gap-4 w-[300px]">

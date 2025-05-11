@@ -8,7 +8,6 @@ export const useGetOrdersFromCacheOrApi = () => {
 	const queryClient = useQueryClient();
 	const [page, setPage] = useState(1);
 	const [isFirstRender, setIsFirstRender] = useState(true);
-	const [renderData, setRenderData] = useState<GetOrdersResponseType>();
 	const [isDataLoading, setIsDataLoading] = useState(false);
 
 	const { data, isBaseLoading, refetch } = useQuery({
@@ -24,21 +23,8 @@ export const useGetOrdersFromCacheOrApi = () => {
 	};
 
 	useEffect(() => {
-		setRenderData(data);
-	}, [data]);
-
-	useEffect(() => {
 		if (isFirstRender) {
 			setIsFirstRender(false);
-
-			const oldData = queryClient.getQueryData(configCacheKeys.orders.orders);
-
-			if (oldData) {
-				setRenderData({
-					ordersCount: oldData.ordersCount,
-					orders: oldData.orders.slice(0, 10)
-				});
-			}
 			return;
 		}
 
@@ -46,11 +32,11 @@ export const useGetOrdersFromCacheOrApi = () => {
 			const oldData = queryClient.getQueryData(configCacheKeys.orders.orders);
 
 			if (oldData.orders.length >= page * 10 || oldData.orders.length === oldData.ordersCount) {
-				const currentStartIndex = (page - 1) * 10;
-				setRenderData({
-					ordersCount: oldData.ordersCount,
-					orders: oldData.orders.slice(0, currentStartIndex + 10)
-				});
+
+				queryClient.setQueryData(configCacheKeys.orders.orders, {
+						ordersCount: oldData.ordersCount,
+						orders: oldData.orders
+					})
 				return;
 			}
 
@@ -65,7 +51,6 @@ export const useGetOrdersFromCacheOrApi = () => {
 				});
 			}
 			setIsDataLoading(false);
-			setRenderData(queryClient.getQueryData(configCacheKeys.orders.orders));
 		};
 
 		updateData().then();
@@ -76,7 +61,6 @@ export const useGetOrdersFromCacheOrApi = () => {
 	const isLoading = isDataLoading || isBaseLoading;
 
 	return {
-		renderData,
 		data,
 		isLoading,
 		page,

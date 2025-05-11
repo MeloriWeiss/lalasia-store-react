@@ -25,7 +25,7 @@ export const LogoutButton: React.FC<Props> = ({ text, className }) => {
 			toast.success(response.message);
 		},
 		onError: (error) => {
-			toast.error(error.response.data.message);
+			toast.error(error.response?.data.message);
 		},
 		onSettled: async () => {
 			AuthTokensUtil.removeTokens();

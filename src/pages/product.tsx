@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { configCacheKeys } from "../shared/config";
+import { configCacheKeys, configEnvironment } from "../shared/config";
 import { useNavigate, useParams } from "react-router";
 import { getProduct } from "../entities/product/model";
 import { Loader, Title } from "../shared/components";
@@ -51,7 +51,7 @@ export const Product: React.FC<Props> = ({ className }) => {
 				<Loader className="mt-36" />
 				:
 				<div className="mt-12 flex">
-					<img className="w-2/5" src={productData?.imageUrl} alt={productData?.name} />
+					<img className="w-2/5" src={configEnvironment.serverStaticPath + productData?.imageUrl} alt={productData?.name} />
 					<div className="px-24">
 						<Title text={productData?.name} size="xl" />
 						<p

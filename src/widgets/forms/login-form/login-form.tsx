@@ -30,7 +30,7 @@ export const LoginForm: React.FC<Props> = ({ className }) => {
 			navigate(configRoutes.main.mask);
 		},
 		onError: (error) => {
-			toast.error(error.response.data.message);
+			toast.error(error.response?.data.message);
 		}
 	});
 

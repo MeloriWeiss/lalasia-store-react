@@ -21,7 +21,7 @@ export const useGetUserInfo = <T>(formData: T, setFormData: React.Dispatch<React
 			});
 		}
 		if (error) {
-			toast.error(error.response.data.message);
+			toast.error(error.response?.data.message);
 		}
 	}, [isSuccess, error]);
 

@@ -3,9 +3,10 @@ import { refresh } from "../../entities";
 import { AuthTokensUtil } from "../utils";
 import { store } from "../../app/store/store.ts";
 import { setTokens } from "../../features";
+import { configEnvironment } from "../config";
 
 export const axiosInstance = axios.create({
-	baseURL: import.meta.env.VITE_BASE_API_URL
+	baseURL: configEnvironment.baseUrl
 });
 
 axiosInstance.interceptors.request.use(

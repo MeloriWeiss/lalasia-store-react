@@ -33,7 +33,7 @@ export const CreateOrderButton: React.FC<Props> = (
 			queryClient.invalidateQueries({ queryKey: configCacheKeys.cart.cart }).then();
 		},
 		onError: (error) => {
-			toast.error(error.response.data.message);
+			toast.error(error.response?.data.message);
 		}
 	});
 

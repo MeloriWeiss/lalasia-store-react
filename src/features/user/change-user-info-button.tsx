@@ -29,7 +29,7 @@ export const ChangeUserInfoButton: React.FC<Props> = (
 			queryClient.invalidateQueries({ queryKey: configCacheKeys.user.userInfo }).then();
 		},
 		onError: (error) => {
-			toast.error(error.response.data.message);
+			toast.error(error.response?.data.message);
 		}
 	});
 

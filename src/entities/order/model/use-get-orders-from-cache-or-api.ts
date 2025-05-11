@@ -10,7 +10,7 @@ export const useGetOrdersFromCacheOrApi = () => {
 	const [isFirstRender, setIsFirstRender] = useState(true);
 	const [isDataLoading, setIsDataLoading] = useState(false);
 
-	const { data, isBaseLoading, refetch } = useQuery({
+	const { data, isLoading: isBaseLoading, refetch } = useQuery({
 		queryKey: configCacheKeys.orders.orders,
 		queryFn: () => getOrders(page)
 	});
@@ -34,9 +34,9 @@ export const useGetOrdersFromCacheOrApi = () => {
 			if (oldData.orders.length >= page * 10 || oldData.orders.length === oldData.ordersCount) {
 
 				queryClient.setQueryData(configCacheKeys.orders.orders, {
-						ordersCount: oldData.ordersCount,
-						orders: oldData.orders
-					})
+					ordersCount: oldData.ordersCount,
+					orders: oldData.orders
+				});
 				return;
 			}
 

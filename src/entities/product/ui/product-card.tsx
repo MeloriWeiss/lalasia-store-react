@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router";
 import { cn } from "../../../shared/utils";
 import { Title } from "../../../shared/components";
-import { configCacheKeys, configRoutes } from "../../../shared/config";
+import { configCacheKeys, configEnvironment, configRoutes } from "../../../shared/config";
 import { CartItemType, ProductType } from "../../../shared/types";
 import { AddToCartButton } from "../../../features";
 import { useQuery } from "@tanstack/react-query";
@@ -22,7 +22,7 @@ export const ProductCard: React.FC<Props> = ({ product, cartItems, className }) 
 	return (
 		<div onClick={() => navigate(configRoutes.product.create(product.id))} className="cursor-pointer">
 			<div className={cn("w-[360px] bg-white", className)}>
-				<img src={product.imageUrl} alt={product.name} className="w-full" height={360} />
+				<img src={configEnvironment.serverStaticPath + product.imageUrl} alt={product.name} className="w-full" height={360} />
 				<div className="py-12 px-3">
 					<div className="flex flex-col gap-2 mb-8">
 						<span className="text-gray-400">{product.type}</span>

@@ -26,7 +26,7 @@ export const UserPasswordChangeForm: React.FC<Props> = ({ className }) => {
 			setFormData(initialState);
 		},
 		onError: (error) => {
-			toast.error(error.response.data.message);
+			toast.error(error.response?.data.message);
 		}
 	});
 

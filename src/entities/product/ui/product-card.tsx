@@ -2,11 +2,11 @@ import React from "react";
 import { useNavigate } from "react-router";
 import { cn } from "../../../shared/utils";
 import { Title } from "../../../shared/components";
-import { configCacheKeys, configEnvironment, configRoutes } from "../../../shared/config";
+import { configEnvironment, configRoutes } from "../../../shared/config";
 import { CartItemType, ProductType } from "../../../shared/types";
 import { AddToCartButton } from "../../../features";
-import { useQuery } from "@tanstack/react-query";
-import { getCart } from "../../cart/model/cart.service.ts";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../app/store/store.ts";
 
 interface Props {
 	product: ProductType;
@@ -16,6 +16,7 @@ interface Props {
 
 export const ProductCard: React.FC<Props> = ({ product, cartItems, className }) => {
 	const navigate = useNavigate();
+	const authorized = useSelector((state: RootState) => state.auth.authorized);
 
 	const productInCart = !!cartItems.find(item => item.product.id === product.id);
 
@@ -34,6 +35,7 @@ export const ProductCard: React.FC<Props> = ({ product, cartItems, className }) 
 						<AddToCartButton
 							productId={product.id}
 							productInCart={productInCart}
+							requestEnabled={authorized}
 						/>
 					</div>
 				</div>

@@ -10,6 +10,7 @@ import { useNavigate } from "react-router";
 interface Props {
 	productId: string;
 	productInCart: boolean;
+	requestEnabled?: boolean;
 	className?: string;
 }
 
@@ -17,6 +18,7 @@ export const AddToCartButton: React.FC<Props> = (
 	{
 		productId,
 		productInCart,
+		requestEnabled = true,
 		className
 	}
 ) => {
@@ -38,7 +40,7 @@ export const AddToCartButton: React.FC<Props> = (
 	const onAddToCart = (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.stopPropagation();
 
-		if (!productInCart) {
+		if (!productInCart && requestEnabled) {
 			mutation.mutate();
 		} else {
 			navigate(configRoutes.cart.mask);

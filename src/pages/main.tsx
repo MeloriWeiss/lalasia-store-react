@@ -7,6 +7,8 @@ import { Loader } from "../shared/components";
 import { useQuery } from "@tanstack/react-query";
 import { configCacheKeys } from "../shared/config";
 import { getCart } from "../entities/cart/model/cart.service.ts";
+import { useSelector } from "react-redux";
+import { RootState } from "../app/store/store.ts";
 
 interface Props {
 	className?: string;
@@ -14,6 +16,7 @@ interface Props {
 
 export const Main: React.FC<Props> = ({ className }) => {
 	const productsRef = useRef(null);
+	const authorized = useSelector((state: RootState) => state.auth.authorized);
 
 	const {
 		searchParams,
@@ -31,7 +34,8 @@ export const Main: React.FC<Props> = ({ className }) => {
 
 	const { data: cartData } = useQuery({
 		queryKey: configCacheKeys.cart.cart,
-		queryFn: getCart
+		queryFn: getCart,
+		enabled: authorized
 	});
 
 	const scrollToTop = () => {

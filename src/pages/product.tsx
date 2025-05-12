@@ -8,6 +8,8 @@ import { ChevronLeft } from "lucide-react";
 import { AddToCartButton } from "../features";
 import { getCart } from "../entities/cart/model/cart.service.ts";
 import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
+import { RootState } from "../app/store/store.ts";
 
 interface Props {
 	className?: string;
@@ -16,6 +18,7 @@ interface Props {
 export const Product: React.FC<Props> = ({ className }) => {
 	const { id } = useParams();
 	const navigate = useNavigate();
+	const authorized = useSelector((state: RootState) => state.auth.authorized);
 
 	const { data: productData, error: productError, isLoading: isProductLoading } = useQuery({
 		queryKey: configCacheKeys.products.product(id || "product-id"),
@@ -26,7 +29,8 @@ export const Product: React.FC<Props> = ({ className }) => {
 
 	const { data: cartData, error: cartError } = useQuery({
 		queryKey: configCacheKeys.cart.cart,
-		queryFn: getCart
+		queryFn: getCart,
+		enabled: authorized
 	});
 
 	useEffect(() => {
@@ -61,6 +65,7 @@ export const Product: React.FC<Props> = ({ className }) => {
 							<AddToCartButton
 								productId={productData?.id || ""}
 								productInCart={productInCart}
+								requestEnabled={authorized}
 							/>
 						</div>
 					</div>

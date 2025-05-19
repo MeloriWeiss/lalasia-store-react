@@ -23,7 +23,7 @@ export const UserInfoChangeForm: React.FC<Props> = ({ className }) => {
 	const { data, refetch } = useGetUserInfo<UserInfoChangeFormType>(formData, setFormData);
 
 	const resetForm = () => {
-		refetch();
+		refetch().then();
 		setFormData({
 			name: data?.name || "",
 			email: data?.email || "",

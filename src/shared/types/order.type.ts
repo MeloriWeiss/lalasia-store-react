@@ -6,7 +6,7 @@ export type OrderType = {
 	address: string;
 	totalPrice: string;
 	products: string;
-	orderStatus: number;
+	orderStatus: string;
 	createdAt: string;
 	updatedAt: string;
 	comment: string | null;

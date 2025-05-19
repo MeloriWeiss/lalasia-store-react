@@ -30,7 +30,9 @@ export const CreateOrderButton: React.FC<Props> = (
 		onSuccess: (response) => {
 			toast.success(response.message);
 			navigate(configRoutes.main.mask);
+
 			queryClient.invalidateQueries({ queryKey: configCacheKeys.cart.cart }).then();
+			queryClient.invalidateQueries({ queryKey: configCacheKeys.orders.orders }).then();
 		},
 		onError: (error) => {
 			toast.error(error.response?.data.message);

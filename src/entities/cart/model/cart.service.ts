@@ -6,8 +6,8 @@ export const getCart = async (): Promise<CartType> => {
 		.then(response => response.data);
 };
 
-export const addToCart = async (productId: string): Promise<DefaultResponseType> => {
-	return axiosInstance.post<DefaultResponseType>("cart/addProduct", { productId })
+export const addToCart = async (productId: string, productCount: number): Promise<DefaultResponseType> => {
+	return axiosInstance.post<DefaultResponseType>("cart/addProduct", { productId, productCount })
 		.then(response => response.data);
 };
 

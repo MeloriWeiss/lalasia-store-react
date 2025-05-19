@@ -6,11 +6,13 @@ import { configCacheKeys, configRoutes } from "../../shared/config";
 import { addToCart } from "../../entities/cart/model/cart.service.ts";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router";
+import { useAddToCart } from "./use-add-to-cart.ts";
 
 interface Props {
 	productId: string;
 	productInCart: boolean;
 	requestEnabled?: boolean;
+	productCountToAdd?: number;
 	className?: string;
 }
 
@@ -19,33 +21,11 @@ export const AddToCartButton: React.FC<Props> = (
 		productId,
 		productInCart,
 		requestEnabled = true,
+		productCountToAdd = 1,
 		className
 	}
 ) => {
-	const navigate = useNavigate();
-	const queryClient = useQueryClient();
-
-	const mutation = useMutation({
-		mutationKey: configCacheKeys.cart.addToCart,
-		mutationFn: () => addToCart(productId),
-		onSuccess: (response) => {
-			queryClient.invalidateQueries({ queryKey: configCacheKeys.cart.cart }).then();
-			toast.success(response.message);
-		},
-		onError: (error) => {
-			toast.error(error.response?.data.message);
-		}
-	});
-
-	const onAddToCart = (event: React.MouseEvent<HTMLButtonElement>) => {
-		event.stopPropagation();
-
-		if (!productInCart && requestEnabled) {
-			mutation.mutate();
-		} else {
-			navigate(configRoutes.cart.mask);
-		}
-	};
+	const onAddToCart = useAddToCart(productId, productInCart, requestEnabled, productCountToAdd);
 
 	return (
 		<Button

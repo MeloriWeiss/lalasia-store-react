@@ -1,8 +1,20 @@
 import React from "react";
 import { Navigate, Route, Routes } from "react-router";
-import { configRoutes } from "../../shared/config";
+import { configRoutes, configUserRoles } from "../../shared/config";
 import { NotFound } from "../../widgets";
-import { Cart, Checkout, Layout, Login, Main, Orders, Product, ProfileInfo, ProfileLayout, Signup } from "../../pages";
+import {
+	Admin,
+	Cart,
+	Checkout,
+	Layout,
+	Login,
+	Main,
+	Orders,
+	Product,
+	ProfileInfo,
+	ProfileLayout,
+	Signup
+} from "../../pages";
 import { useSelector } from "react-redux";
 import { RootState } from "./../store/store.ts";
 import { GoBack } from "../../shared/components";
@@ -13,6 +25,7 @@ interface Props {
 
 export const AppRoutes: React.FC<Props> = ({ className }) => {
 	const authorized = useSelector((state: RootState) => state.auth.authorized);
+	const roles = useSelector((state: RootState) => state.auth.userRoles);
 
 	return (
 		<Routes>
@@ -30,6 +43,8 @@ export const AppRoutes: React.FC<Props> = ({ className }) => {
 							 element={authorized ? <Cart /> : <Navigate to={configRoutes.login.mask} />} />
 				<Route path={configRoutes.checkout.mask}
 							 element={authorized ? <Checkout /> : <Navigate to={configRoutes.login.mask} />} />
+				<Route path={configRoutes.admin.mask}
+							 element={authorized ? <Admin /> : <Navigate to={configRoutes.main.mask} />} />
 				<Route path="*" element={<NotFound />} />
 			</Route>
 		</Routes>

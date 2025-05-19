@@ -4,12 +4,12 @@ import { Button, FormContainer, FormInput } from "../../../shared/components";
 import { Link, useNavigate } from "react-router";
 import { configCacheKeys, configRoutes } from "../../../shared/config";
 import toast from "react-hot-toast";
-import { setTokens } from "../../../features";
 import { useDispatch } from "react-redux";
 import { signup } from "../../../entities";
 import { AuthTokensUtil } from "../../../shared/utils";
 import { useChangeFormData, useFormValidation } from "../../../shared/hooks";
 import { useMutation } from "@tanstack/react-query";
+import { setTokens } from "../../../features";
 
 interface Props {
 	className?: string;
@@ -23,7 +23,7 @@ export const SignupForm: React.FC<Props> = ({ className }) => {
 		mutationKey: configCacheKeys.auth.signup,
 		mutationFn: () => signup(formData),
 		onSuccess: (signupResult) => {
-			AuthTokensUtil.setTokens(signupResult);
+			AuthTokensUtil.setTokens(signupResult)
 			dispatch(setTokens(signupResult));
 
 			toast.success("You have successfully registered");

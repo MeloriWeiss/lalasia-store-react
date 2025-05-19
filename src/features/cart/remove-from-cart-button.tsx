@@ -37,6 +37,6 @@ export const RemoveFromCartButton: React.FC<Props> = (
 
 	return (
 		<div onClick={onRemove ? undefined : mutation.mutate}
-				 className={cn("absolute top-2 right-4 text-2xl text-gray-400 hover:text-gray-700 transition cursor-pointer", className)}>&times;</div>
+				 className={cn("absolute top-2 right-4 text-2xl text-gray-400 hover:text-gray-700 transition cursor-pointer select-none", className)}>&times;</div>
 	);
 };

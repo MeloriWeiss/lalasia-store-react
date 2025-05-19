@@ -2,25 +2,27 @@ export const configCacheKeys = {
 	auth: {
 		signup: ["auth", "signup"],
 		login: ["auth", "login"],
-		logout: ["auth", "logout"]
+		logout: ["auth", "logout"],
+		userRoles: ["auth", "userRoles"]
 	},
 	products: {
 		products: ["products", "products"],
-		product: (id: string) => ["product", id],
+		product: (id: string) => ["product", id]
 	},
 	cart: {
 		cart: ["cart", "cart"],
 		updateProductCountInCart: ["cart", "updateProductCountInCart"],
 		removeProductFromCart: ["cart", "removeProductFromCart"],
-		addToCart: ["cart", "addToCart"],
+		addToCart: ["cart", "addToCart"]
 	},
 	orders: {
 		orders: ["orders", "orders"],
 		createOrder: ["orders", "createOrder"],
+		changeStatus: ["orders", "changeStatus"]
 	},
 	user: {
 		userInfo: ["user", "userInfo"],
 		updateUserInfo: ["user", "updateUserInfo"],
-		updateUserPassword: ["user", "updateUserPassword"],
-	},
+		updateUserPassword: ["user", "updateUserPassword"]
+	}
 };

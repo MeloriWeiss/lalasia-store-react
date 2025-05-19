@@ -1,8 +1,8 @@
 import { axiosInstance } from "../../../shared/axios";
-import { GetProductsResponseType, ProductType, SearchParamsType } from "../../../shared/types";
+import { GetProductsResponse, ProductType, SearchParamsType } from "../../../shared/types";
 
-export const getProducts = async (params: SearchParamsType): Promise<GetProductsResponseType> => {
-	return axiosInstance.get<GetProductsResponseType>('products/getProducts?' +
+export const getProducts = async (params: SearchParamsType): Promise<GetProductsResponse> => {
+	return axiosInstance.get<GetProductsResponse>('products/getProducts?' +
 		Object.entries(params).map(([key, value]) => `${key}=${value}`).join("&"))
 		.then(response => response.data);
 };

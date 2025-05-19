@@ -2,8 +2,8 @@ import axios from "axios";
 import { refresh } from "../../entities";
 import { AuthTokensUtil } from "../utils";
 import { store } from "../../app/store/store.ts";
-import { setTokens } from "../../features";
-import { configEnvironment } from "../config";
+import { removeTokens, setTokens } from "../../features";
+import { configEnvironment, configRoutes } from "../config";
 
 export const axiosInstance = axios.create({
 	baseURL: configEnvironment.baseUrl
@@ -34,7 +34,10 @@ axiosInstance.interceptors.response.use(
 
 		if (error.response.status === 401) {
 			if (request.url.includes("/refresh")) {
-				window.location.href = '/';
+				AuthTokensUtil.removeTokens();
+				store.dispatch(removeTokens());
+
+				window.location.href = configRoutes.login.mask;
 				return Promise.reject(error);
 			}
 

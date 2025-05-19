@@ -1,0 +1,1 @@
+export const orderStatuses = ["Pending", "Succeeded", "Cancelled"];

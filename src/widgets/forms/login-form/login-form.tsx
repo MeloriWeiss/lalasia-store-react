@@ -7,7 +7,7 @@ import { login } from "../../../entities";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { AuthTokensUtil } from "../../../shared/utils";
-import { setTokens } from "../../../features";
+import { initAuthState, setTokens } from "../../../features";
 import { useChangeFormData, useFormValidation } from "../../../shared/hooks";
 import { useMutation } from "@tanstack/react-query";
 

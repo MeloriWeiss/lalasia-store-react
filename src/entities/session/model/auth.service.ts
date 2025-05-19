@@ -26,3 +26,8 @@ export const logout = async (): Promise<DefaultResponseType> => {
 	return axiosInstance.post<DefaultResponseType>('auth/logout')
 		.then(response => response.data);
 }
+
+export const getUserRoles = async (): Promise<string[]> => {
+	return axiosInstance.get<string[]>('auth/getUserRoles')
+		.then(response => response.data);
+}

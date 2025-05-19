@@ -6,11 +6,13 @@ import { SearchParamsType } from "../../../shared/types";
 import { getProducts } from "./products.service.ts";
 
 export const useFetchProducts = (searchParams: URLSearchParams, params: SearchParamsType) => {
-	const [isFirst, setIdFirst] = useState(false);
+	const [skippedFirstRender, setSkippedFirstRender] = useState(false);
 
 	const { data, isLoading, error, refetch } = useQuery({
 		queryKey: configCacheKeys.products.products,
 		queryFn: () => getProducts(params),
+		staleTime: 0,
+		gcTime: 0
 	});
 
 	useEffect(() => {
@@ -20,10 +22,10 @@ export const useFetchProducts = (searchParams: URLSearchParams, params: SearchPa
 	}, [error]);
 
 	useEffect(() => {
-		if (isFirst) {
-			refetch();
+		if (skippedFirstRender) {
+			refetch().then();
 		}
-		setIdFirst(true);
+		setSkippedFirstRender(true);
 	}, [searchParams]);
 
 	return {

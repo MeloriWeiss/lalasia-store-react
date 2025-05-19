@@ -8,5 +8,7 @@ export { SearchParamsType } from "./search-params.type";
 export { OrderType } from "./order.type";
 export { UserPasswordChangeDataType } from "./user-password-change-data.type.ts";
 export { UserInfoChangeDataType } from "./user-info-change-data.type.ts";
-export { GetProductsResponseType } from "./get-products-response.type.ts";
+export { GetProductsResponse } from "./get-products-response.ts";
 export { GetOrdersResponseType } from "./get-orders-response.type.ts";
+export { ChangeOrderStatusRequest } from "./change-order-status-request.ts";
+export { ChangeOrderStatusResponse } from "./change-order-status-response.ts";

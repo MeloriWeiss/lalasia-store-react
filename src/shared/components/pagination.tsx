@@ -28,10 +28,18 @@ export const Pagination: React.FC<Props> = (
 	}
 
 	return (
-		<div className={cn("flex justify-center items-center gap-3 select-none", className)}>
-			<ChevronLeft width={50} height={50} onClick={() => changePage(currentPage - 1)} className="cursor-pointer p-2" />
-			<span className="font-semibold text-2xl">{currentPage}</span>
-			<ChevronRight width={50} height={50} onClick={() => changePage(currentPage + 1)} className="cursor-pointer p-2" />
+		<div className={cn("flex justify-center items-center gap-2 select-none", className)}>
+			<ChevronLeft width={50} height={50} onClick={() => changePage(currentPage - 1)} className={cn("cursor-pointer p-2", {
+				"opacity-40" : currentPage === 1
+			})} />
+			<span className="font-semibold text-2xl flex items-center gap-2 text-center">
+				<span className="w-6">{currentPage}</span>
+				<span>of</span>
+				<span className="w-6">{maxPage}</span>
+			</span>
+			<ChevronRight width={50} height={50} onClick={() => changePage(currentPage + 1)} className={cn("cursor-pointer p-2", {
+				"opacity-40" : currentPage === maxPage
+			})} />
 		</div>
 	);
 };

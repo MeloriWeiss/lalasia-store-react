@@ -18,3 +18,8 @@ export const changeOrderStatus = async (data: ChangeOrderStatusRequest): Promise
 	return axiosInstance.patch<ChangeOrderStatusResponse>("orders/changeOrderStatus", data)
 		.then(response => response.data);
 }
+
+export const getAllOrders = async (page: number): Promise<GetOrdersResponseType> => {
+	return axiosInstance.get<GetOrdersResponseType>("orders/getAllOrders?page=" + String(page))
+		.then(response => response.data);
+}

@@ -2,17 +2,17 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { GetOrdersResponseType } from "../../../shared/types";
 import { configCacheKeys } from "../../../shared/config";
-import { getOrders } from "./orders.service.ts";
+import { getAllOrders, getOrders } from "./orders.service.ts";
 
-export const useGetOrdersFromCacheOrApi = () => {
+export const useGetOrdersFromCacheOrApi = (isAdmin: boolean) => {
 	const queryClient = useQueryClient();
 	const [page, setPage] = useState(1);
 	const [isFirstRender, setIsFirstRender] = useState(true);
 	const [isDataLoading, setIsDataLoading] = useState(false);
 
 	const { data, isLoading: isBaseLoading, refetch } = useQuery({
-		queryKey: configCacheKeys.orders.orders,
-		queryFn: () => getOrders(page)
+		queryKey: isAdmin ? configCacheKeys.orders.allOrders : configCacheKeys.orders.orders,
+		queryFn: () => isAdmin ? getAllOrders(page) : getOrders(page)
 	});
 
 	const fetchOrders = () => {

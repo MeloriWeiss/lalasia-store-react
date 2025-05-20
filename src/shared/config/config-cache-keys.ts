@@ -17,6 +17,7 @@ export const configCacheKeys = {
 	},
 	orders: {
 		orders: ["orders", "orders"],
+		allOrders: ["orders", "allOrders"],
 		createOrder: ["orders", "createOrder"],
 		changeStatus: ["orders", "changeStatus"]
 	},

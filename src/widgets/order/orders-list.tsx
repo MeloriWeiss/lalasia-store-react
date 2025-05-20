@@ -15,7 +15,7 @@ export const OrdersList: React.FC<Props> = ({ isAdmin = false, className }) => {
 		page,
 		maxPage,
 		fetchOrders
-	} = useGetOrdersFromCacheOrApi();
+	} = useGetOrdersFromCacheOrApi(isAdmin);
 
 	if (isLoading && data?.orders.length === 0) {
 		return <Loader />;

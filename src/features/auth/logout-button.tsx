@@ -31,7 +31,9 @@ export const LogoutButton: React.FC<Props> = ({ text, className }) => {
 			AuthTokensUtil.removeTokens();
 			dispatch(removeTokens());
 
-			queryClient.clear();
+			setTimeout(() => {
+				queryClient.clear();
+			}, 500);
 			navigate(configRoutes.login.mask);
 		}
 	});

@@ -1,6 +1,6 @@
 import React from "react";
 import { Navigate, Route, Routes } from "react-router";
-import { configRoutes, configUserRoles } from "../../shared/config";
+import { configRoutes } from "../../shared/config";
 import { NotFound } from "../../widgets";
 import {
 	Admin,
@@ -19,13 +19,8 @@ import { useSelector } from "react-redux";
 import { RootState } from "./../store/store.ts";
 import { GoBack } from "../../shared/components";
 
-interface Props {
-	className?: string;
-}
-
-export const AppRoutes: React.FC<Props> = ({ className }) => {
+export const AppRoutes: React.FC = () => {
 	const authorized = useSelector((state: RootState) => state.auth.authorized);
-	const roles = useSelector((state: RootState) => state.auth.userRoles);
 
 	return (
 		<Routes>

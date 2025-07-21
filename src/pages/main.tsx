@@ -39,11 +39,13 @@ export const Main: React.FC<Props> = ({ className }) => {
 	});
 
 	const scrollToTop = () => {
-		productsRef.current.scrollIntoView();
+		if (productsRef.current) {
+			(productsRef.current as HTMLElement).scrollIntoView();
+		}
 	};
 
-	const maxPage = Math.ceil(productsData?.productsCount / 6);
-
+	const maxPage = Math.ceil((productsData?.productsCount || 0) / 6);
+	console.log(maxPage);
 	return (
 		<div className={className}>
 			<div className="mb-14 mx-auto text-center max-w-[750px]">
@@ -76,7 +78,7 @@ export const Main: React.FC<Props> = ({ className }) => {
 					<div onClick={scrollToTop}>
 						<Pagination
 							currentPage={currentPage}
-							maxPage={Math.ceil(productsData?.productsCount / 6)}
+							maxPage={Math.ceil((productsData?.productsCount || 0) / 6)}
 							onChangePage={setCurrentPage}
 							className="mt-14"
 						/>

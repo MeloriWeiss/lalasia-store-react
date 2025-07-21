@@ -6,7 +6,7 @@ import { undefined } from "zod";
 export const useSearchProductsParams = () => {
 	const [searchParams, setSearchParams] = useSearchParams();
 
-	const [currentPage, setCurrentPage] = useState(+searchParams.get("page") || 1);
+	const [currentPage, setCurrentPage] = useState(Number(searchParams.get("page")) || 1);
 	const [searchQuery, setSearchQuery] = useState(searchParams.get("query") || "");
 	const [selectedType, setSelectedType] = useState(searchParams.get("types") || "");
 
